@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spark-worker
+spec:
+  replicas: 1 # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      component: spark-worker
+  template:
+    metadata:
+      labels:
+        component: spark-worker
+    spec:
+      containers:
+        - name: spark-worker
+          image: ajith154/firstimage:latest
+          command:
+          - /opt/spark/bin/spark-class
+          - org.apache.spark.deploy.worker.Worker
+          - spark://10.114.1.75:7077
+          # Add any environment variables or volume mounts as needed
+

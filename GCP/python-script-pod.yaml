@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kafka-scripting-pod
+spec:
+  containers:
+  - name: python-container
+    image: ajith154/firstimage:latest # Use a Python image that has Python installed
+    command:
+    - "spark-submit"
+    args:
+    - "/path/to/kafka.py"
+    volumeMounts:
+    - name: script-volume
+      mountPath: /path/to
+  volumes:
+  - name: script-volume
+    configMap:
+      name: kafka-script-config
+
